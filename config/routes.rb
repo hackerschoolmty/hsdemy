@@ -8,6 +8,7 @@ Rails.application.routes.draw do
                                              :defaults => {:format => :json}, :default => true) do
 
       resources :courses, only: [:index, :show, :create, :update, :destroy]
+      resources :students, only: [:show]
     end
   end
 

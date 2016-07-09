@@ -10,4 +10,9 @@ RSpec.describe Course, :type => :model do
     it { should validate_numericality_of(:limit).is_greater_than(1) }
   end
 
+  describe "#associations" do
+    it { should have_many(:enrollments) }
+    it { should have_many(:students).through(:enrollments) }
+  end
+
 end

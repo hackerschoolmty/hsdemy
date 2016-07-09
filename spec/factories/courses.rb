@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :course do
-    name "MyString"
-    limit 1
+    name { ["Rubu 101", "Rails 101", "API's 101", "Patterns 101"].sample }
+    limit { rand(1..30) }
   end
 end

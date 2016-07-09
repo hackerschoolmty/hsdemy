@@ -13,7 +13,7 @@ class Api::V1::CoursesController < Api::V1::BaseController
     if course.save
       render json: course, status: 201
     else
-      render json: course, status: 422
+      render json: { course: { errors: course.errors } }, status: 422
     end
   end
 

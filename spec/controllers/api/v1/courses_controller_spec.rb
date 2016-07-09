@@ -60,4 +60,13 @@ RSpec.describe Api::V1::CoursesController, :type => :controller do
     end
   end
 
+  describe "DELETE #destroy" do
+    it "returns a no content header" do
+      course = FactoryGirl.create :course
+      delete :destroy, id: course.id
+
+      expect(response).to have_http_status(204)
+    end
+  end
+
 end

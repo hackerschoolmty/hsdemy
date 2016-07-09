@@ -26,6 +26,12 @@ class Api::V1::CoursesController < Api::V1::BaseController
     end
   end
 
+  def destroy
+    course = Course.find(params[:id])
+    course.destroy
+    head 204
+  end
+
   private
 
     def course_params

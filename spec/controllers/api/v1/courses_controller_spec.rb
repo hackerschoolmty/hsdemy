@@ -39,4 +39,25 @@ RSpec.describe Api::V1::CoursesController, :type => :controller do
     end
   end
 
+  describe "PUT #update" do
+    context "when is success" do
+      it "returns the record that was just updated" do
+        course = FactoryGirl.create :course
+        course_params = { name: "Hello World 101" }
+        put :update, { id: course.id, course: course_params }
+
+        expect(json_response[:course][:name]).to eql "Hello World 101"
+      end
+    end
+    context "when is not success" do
+      it "returns the object with an errors key" do
+        course = FactoryGirl.create :course
+        course_params = { name: "" }
+        put :update, { id: course.id, course: course_params }
+
+        expect(json_response[:course]).to have_key(:errors)
+      end
+    end
+  end
+
 end

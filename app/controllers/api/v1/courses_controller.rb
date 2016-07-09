@@ -17,6 +17,15 @@ class Api::V1::CoursesController < Api::V1::BaseController
     end
   end
 
+  def update
+    course = Course.find(params[:id])
+    if course.update(course_params)
+      render json: course, status: 200
+    else
+      render json: { course: { errors: course.errors } }, status: 422
+    end
+  end
+
   private
 
     def course_params

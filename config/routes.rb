@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     api_version(:module => "V1", :header => {:name => "Accept",
                                              :value => "application/vnd.hsdemy.com+json; version=1"},
                                              :defaults => {:format => :json}, :default => true) do
-      resources :courses, only: [:index, :show, :create]
+      resources :courses, only: [:index, :show, :create, :update]
     end
   end
 

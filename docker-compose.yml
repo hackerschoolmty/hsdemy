@@ -83,3 +83,15 @@ services:
     # in order to be available on the app containers:
     env_file:
       - dev.env
+  test:
+    <<: *app
+    environment:
+      <<: *app_environment
+      DATABASE_URL: postgres://postgres:P4Ssw0rD!@db:5432/hsdemy_test?pool=25&encoding=unicode&schema_search_path=public,partitioning
+
+      # We'll set the RAILS_ENV and RACK_ENV environment variables to
+      # 'development', so our app containers will start in 'development' mode
+      # on this compose project:
+      RAILS_ENV: test
+      RACK_ENV: test
+

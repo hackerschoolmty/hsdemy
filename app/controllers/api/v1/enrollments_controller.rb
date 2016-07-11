@@ -11,6 +11,16 @@ class Api::V1::EnrollmentsController < Api::V1::BaseController
     end
   end
 
+  def destroy
+    course = Course.find(params[:course_id])
+    student = Student.find(params[:student_id])
+
+    enrollment = Enrollment.find_by(course_id: course.id, student_id: student.id)
+    enrollment.destroy
+
+    head 204
+  end
+
   private
 
     def enrollment_params

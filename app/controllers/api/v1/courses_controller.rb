@@ -1,7 +1,12 @@
 class Api::V1::CoursesController < Api::V1::BaseController
 
   def index
-    render json: Course.all
+    if params[:teacher_id].present?
+      teacher = Teacher.find(params[:teacher_id])
+      render json: teacher.courses
+    else
+      render json: Course.all
+    end
   end
 
   def show

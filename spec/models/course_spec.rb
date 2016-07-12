@@ -11,6 +11,7 @@ RSpec.describe Course, :type => :model do
   end
 
   describe "#associations" do
+    it { should belong_to :teacher }
     it { should have_many(:enrollments) }
     it { should have_many(:students).through(:enrollments) }
   end

@@ -3,22 +3,24 @@ require 'rails_helper'
 RSpec.describe Api::V1::CoursesController, :type => :controller do
 
   describe "GET #index" do
-    context "when the :teacher_id param is present" do
-      it "return just the courses for a single teacher" do
-        teacher = FactoryGirl.create :teacher
-
-        3.times { FactoryGirl.create :course, teacher: teacher }
-        5.times { FactoryGirl.create :course }
-
-        get :index, { teacher_id: teacher.id }
-        expect(json_response[:courses].count).to be 3
-      end
-    end
-    context "when the :teacher_id param IS NOT present" do
+    context "when the :q param IS NOT present" do
       it "returns 4 records from the database in json" do
         4.times { FactoryGirl.create :course }
+
         get :index
         expect(json_response[:courses].count).to be 4
+      end
+    end
+
+    context "when the :q param IS present" do
+      it "returns 2 out of records due to filtering by :q in json" do
+        FactoryGirl.create :course, name: "Ruby 101"
+        FactoryGirl.create :course, name: "Rails 101"
+        FactoryGirl.create :course, name: "Javascript"
+        FactoryGirl.create :course, name: ".Net"
+
+        get :index, { q: "101" }
+        expect(json_response[:courses].count).to be 2
       end
     end
   end

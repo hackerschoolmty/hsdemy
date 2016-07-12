@@ -7,6 +7,7 @@ Rails.application.routes.draw do
                                              :value => "application/vnd.hsdemy.com+json; version=1"},
                                              :defaults => {:format => :json}, :default => true) do
 
+      resources :teachers, only: [:index, :show]
       resources :courses, only: [:index, :show, :create, :update, :destroy] do
         resources :enrollments, only: [:create, :destroy]
       end
